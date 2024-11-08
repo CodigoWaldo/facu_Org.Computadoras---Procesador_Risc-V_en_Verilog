@@ -1,2 +1,2 @@
-# facu_Org.Computadoras---Procesador_Risc-V_en_Verilog
-Circuitos de un procesador procesador Risc-V monociclo 
+# Circuito de un procesador Risc-V monociclo
+Circuitos de un procesador Risc-V monociclo en Verilog
