@@ -1,8 +1,8 @@
 module DM(
     input wire [31:0]   srcA,
     input wire [31:0]   srcB,
-    input wire [2:0]   ALUControl,
-
+    input wire [2:0]   ALUControl, //op what gotta do
+    output wire zero,   //devuelve siempre zero (bandera creo)
     output reg [31:0]   res   // Read data output 1   
 );
 
@@ -22,7 +22,7 @@ always @(posedge clk)
             res0 = srcA or srcB;
         3'b101: //set less than
         res0 = (srcA >srcB ? srcA : srcB);
-        default: 
+        default: // do nothing
         res0=srcA;        
     
     
