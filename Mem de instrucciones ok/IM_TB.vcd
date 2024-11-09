@@ -1,0 +1,41 @@
+$date
+	Sat Nov 09 16:44:10 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module IM_TB $end
+$var wire 32 ! rd_test [31:0] $end
+$var parameter 32 " DURATION $end
+$var reg 5 # address_test [4:0] $end
+$scope module IM_UUT $end
+$var wire 5 $ address [4:0] $end
+$var reg 32 % rd [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1010 "
+$end
+#0
+$dumpvars
+bx %
+bx $
+bx #
+bx !
+$end
+#200000
+b1001000110100010101100111 !
+b1001000110100010101100111 %
+b0 #
+b0 $
+#550000
+b1001000110100001100110011 !
+b1001000110100001100110011 %
+b1 #
+b1 $
+#1550000

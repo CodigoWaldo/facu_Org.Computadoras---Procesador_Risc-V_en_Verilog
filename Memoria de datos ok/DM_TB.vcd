@@ -1,0 +1,75 @@
+$date
+	Sat Nov 09 19:05:47 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module DM_TB $end
+$var wire 32 ! rd_test [31:0] $end
+$var parameter 32 " DURATION $end
+$var reg 5 # adm_test [4:0] $end
+$var reg 1 $ clk_test $end
+$var reg 32 % wd_test [31:0] $end
+$var reg 1 & we_test $end
+$scope module DM_UUT $end
+$var wire 5 ' addressDM [4:0] $end
+$var wire 1 $ clk $end
+$var wire 32 ( wd [31:0] $end
+$var wire 1 & we $end
+$var reg 32 ) rd [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1010 "
+$end
+#0
+$dumpvars
+bx )
+b101011000110011010001010011 (
+b1 '
+0&
+b101011000110011010001010011 %
+0$
+b1 #
+bx !
+$end
+#100000
+b10010001100010001000100010001 !
+b10010001100010001000100010001 )
+1$
+#200000
+0$
+#300000
+1$
+#400000
+0$
+#500000
+1$
+1&
+#600000
+0$
+#700000
+b101011000110011010001010011 !
+b101011000110011010001010011 )
+1$
+#800000
+0$
+#900000
+1$
+#1000000
+0$
+#1100000
+1$
+#1200000
+0$
+#1300000
+1$
+#1400000
+0$
+#1500000
+1$
