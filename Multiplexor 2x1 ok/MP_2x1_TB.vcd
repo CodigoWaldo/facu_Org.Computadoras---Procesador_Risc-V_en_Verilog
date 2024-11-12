@@ -1,0 +1,46 @@
+$date
+	Tue Nov 12 10:19:45 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module MP_2x1_TB $end
+$var parameter 32 ! DURATION $end
+$var reg 1 " sel_test $end
+$var reg 32 # srcA_test [31:0] $end
+$var reg 32 $ srcB_test [31:0] $end
+$scope module mu_2x1_UUT $end
+$var wire 32 % i1 [31:0] $end
+$var wire 32 & i2 [31:0] $end
+$var wire 32 ' out [31:0] $end
+$var wire 1 " sel $end
+$var reg 32 ( aux [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1010 !
+$end
+#0
+$dumpvars
+b1000000000001000000000001 (
+b1000000000001000000000001 '
+b0 &
+b1000000000001000000000001 %
+b0 $
+b1000000000001000000000001 #
+0"
+$end
+#100000
+b0 '
+b0 (
+1"
+#450000
+b1000000000001000000000001 '
+b1000000000001000000000001 (
+0"
+#1450000
