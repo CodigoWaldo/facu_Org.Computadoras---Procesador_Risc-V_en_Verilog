@@ -1,0 +1,40 @@
+$date
+	Tue Nov 12 12:18:14 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module SE_TB $end
+$var wire 32 ! inmExt_test [31:0] $end
+$var parameter 32 " DURATION $end
+$var reg 25 # inm_test [24:0] $end
+$var reg 1 $ src_test $end
+$scope module SE_UUT $end
+$var wire 25 % inm [24:0] $end
+$var wire 1 $ src $end
+$var reg 32 & inmExt [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1010 "
+$end
+#0
+$dumpvars
+b100111001111 &
+b1001110011110000000000000 %
+0$
+b1001110011110000000000000 #
+b100111001111 !
+$end
+#500000
+b110101010101 !
+b110101010101 &
+1$
+b1101010000000000000010101 #
+b1101010000000000000010101 %
+#1500000

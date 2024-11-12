@@ -17,7 +17,7 @@
 	slt t6, s1, t4, 					# j = 0
 	
 #	un while usando beq y j 
-#	Inicializo 3 variables
+#	Inicializo 3 variables 
  	# s2 = 0x10 cte para comparar (16)
 	addi t0, zero, 1 					# var = 1, variable de trabajo
 	addi t1, zero, 0 					# cuenta = 0, un contador
