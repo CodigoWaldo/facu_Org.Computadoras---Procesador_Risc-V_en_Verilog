@@ -12,14 +12,14 @@ always @(*)
 begin
 
     case (aluOp)
-        2'b00:
+        2'b00://lw,sw
             aluControlAux = 3'b000; //add
-        2'b01:
+        2'b01://beq
             aluControlAux = 3'b001; //substract
         2'b10:
             case(f3)
                 3'b000:
-                    if(f7 && op)
+                    if(f7[5] && op[5])//if aritmetica
                     begin
                         aluControlAux = 3'b001; //substract
                     end else begin
@@ -31,6 +31,7 @@ begin
                     aluControlAux = 3'b011;     //or
                 3'b111:
                     aluControlAux = 3'b010;     //and
+            default: aluControlAux = 000;
             endcase
     endcase
 end

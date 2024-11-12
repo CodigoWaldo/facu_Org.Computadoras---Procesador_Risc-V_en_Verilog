@@ -1,0 +1,57 @@
+$date
+	Tue Nov 12 11:11:57 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module alu_deco_TB $end
+$var wire 3 ! aluControl_test [2:0] $end
+$var parameter 32 " DURATION $end
+$var reg 1 # aluOp_test $end
+$var reg 3 $ f3_test [2:0] $end
+$var reg 7 % f7_test [6:0] $end
+$var reg 7 & op_test [6:0] $end
+$scope module alu_deco_UUT $end
+$var wire 3 ' aluControl [2:0] $end
+$var wire 2 ( aluOp [1:0] $end
+$var wire 3 ) f3 [2:0] $end
+$var wire 7 * f7 [6:0] $end
+$var wire 7 + op [6:0] $end
+$var reg 3 , aluControlAux [2:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1010 "
+$end
+#0
+$dumpvars
+b0 ,
+b0 +
+b10000 *
+b0 )
+b0 (
+b0 '
+b0 &
+b10000 %
+b0 $
+0#
+b0 !
+$end
+#100000
+b1 !
+b1 '
+b1 ,
+b1 (
+1#
+#250000
+b0 !
+b0 '
+b0 ,
+b0 (
+0#
+#1350000
