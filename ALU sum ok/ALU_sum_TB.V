@@ -12,7 +12,7 @@ module  ALU_sum_TB;
 
     ALU_sum ALU_SUM_UUT(       
         .srcA(srcA_test),
-        .srcB(srcB_test),        
+        .srcB(srcB_test)      
     );
   
     initial begin      
@@ -21,7 +21,7 @@ module  ALU_sum_TB;
         srcB_test = 32'h00000000; 
 
         $dumpfile(`DUMPSTR);  
-        $dumpvars(0, BR_TB);   
+        $dumpvars(0, ALU_sum_TB);   
 
         #1
         srcA_test = 32'h00000001;       

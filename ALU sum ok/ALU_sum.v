@@ -8,7 +8,7 @@ module  ALU_sum(
 
 reg [31:0] res0;
 
-always @(posedge clk) 
+always @(*) 
     begin   
         res0 = srcA + srcB;
         res <= res0;  

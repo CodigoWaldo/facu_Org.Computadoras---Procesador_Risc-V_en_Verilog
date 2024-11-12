@@ -1,0 +1,45 @@
+$date
+	Tue Nov 12 09:15:57 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module ALU_sum_TB $end
+$var parameter 32 ! DURATION $end
+$var reg 32 " srcA_test [31:0] $end
+$var reg 32 # srcB_test [31:0] $end
+$scope module ALU_SUM_UUT $end
+$var wire 32 $ srcA [31:0] $end
+$var wire 32 % srcB [31:0] $end
+$var reg 32 & res [31:0] $end
+$var reg 32 ' res0 [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1010 !
+$end
+#0
+$dumpvars
+b0 '
+b0 &
+b0 %
+b0 $
+b0 #
+b0 "
+$end
+#100000
+b1 &
+b1 '
+b1 "
+b1 $
+#450000
+b10001 &
+b10001 '
+b10000 #
+b10000 %
+#1450000
