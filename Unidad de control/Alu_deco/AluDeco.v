@@ -3,6 +3,7 @@ module alu_deco(
     input [6:0] f7,
     input [2:0] f3,
     input [1:0] aluOp,
+
     output [2:0] aluControl
 );
 
