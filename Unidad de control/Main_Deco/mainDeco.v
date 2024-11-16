@@ -1,5 +1,6 @@
 module main_deco(
     input [6:0] op,         // opcode
+
     output wire branch,     // branch signal
     output wire jump,       // jump signal
     output [1:0] resSrc,    // result source
@@ -9,6 +10,7 @@ module main_deco(
     output wire regWrite,   // register write signal
     output [1:0] aluOp      // ALU operation
 );
+
 
 // Auxvars
 
@@ -24,7 +26,7 @@ reg [1:0] aluOpAux = 0;     // auxiliary variable for ALU operation
 always @(*)
 begin
     case (op)
-        3:      //lw
+        7'd3:      //lw
         begin
             branchAux = 0;
             resSrcAux = 2'b01; // load word instruction
@@ -34,7 +36,7 @@ begin
             regWriteAux = 1;
             aluOpAux = 2'b00;
         end
-        35:     //sw
+        7'd35:     //sw
         begin
             branchAux = 0;
             memWriteAux = 1; // store word instruction
@@ -43,7 +45,7 @@ begin
             regWriteAux = 0;
             aluOpAux = 2'b00;
         end
-        51:     //R-Type
+        7'd51:     //R-Type
         begin
             branchAux = 0;
             resSrcAux = 2'b00;
@@ -52,7 +54,7 @@ begin
             regWriteAux = 1;
             aluOpAux = 2'b10; // R-type instruction
         end
-        99:     //beq
+        7'd99:     //beq
         begin
             branchAux = 1; // branch if equal instruction
             memWriteAux = 0;
@@ -61,7 +63,7 @@ begin
             regWriteAux = 0;
             aluOpAux = 2'b01;
         end
-        19:     //I-Type
+        7'd19:     //I-Type
         begin
             branchAux = 0;
             resSrcAux = 2'b00;
@@ -71,7 +73,7 @@ begin
             regWriteAux = 1;
             aluOpAux = 2'b10; // I-type instruction
         end
-        111:        //jal
+        7'd111:        //jal
         begin
             branchAux = 0;
             jumpAux = 1; // jump and link instruction
