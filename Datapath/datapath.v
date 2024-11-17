@@ -4,44 +4,38 @@ modulos para conformar el procesador.
 */
 
 //Unidad de control
-`include "../Unidad de control/UC.v"
+`include "Unidad de control/UC.v"
 //Memorias
-`include "../Memoria de datos/DM.v"     
-`include "../Mem de instrucciones/IM.v" 
-`include "../Banco de registro/BR.v" 
+`include "Memoria de datos/DM.v"     
+`include "Mem de instrucciones/IM.v" 
+`include "Banco de registro/BR.v" 
 //multiplexores
-`include "../Multiplexor 2x1/MP_2x1.v"         
-`include "../Multiplexor 3x1/MP_3x1.v"
+`include "Multiplexor 2x1/MP_2x1.v"         
+`include "Multiplexor 3x1/MP_3x1.v"
 //ALU y Sumadores
-`include "../ALU/ALU.v"  
-`include "../ALU sum/ALU_sum.v"             //suma el binario de dos entradas
-`include "../ALU sum 4bits/ALU_sum_4b.v"    //suma 4 bits a una entrada (pc next)
+`include "ALU/ALU.v"  
+`include "ALU sum/ALU_sum.v"             //suma el binario de dos entradas
+`include "ALU sum 4bits/ALU_sum_4b.v"    //suma 4 bits a una entrada (pc next)
 //otros
-`include "../Extensor de signo/SE.v"
-`include "../Reg contador de programa/PC.v"
+`include "Extensor de signo/SE.v"
+`include "Reg contador de programa/PC.v"
 
-module datapath(
-        input logic rst_n,  //reset
-        input logic clk     //relog
-    );
+module datapath (
+    input wire clk,
+    input wire pcSrc,     // Señal de bifurcación (branch)
+    input [1:0] resultSrc, // Fuente del resultado
+    input wire memWrite,   // Señal de escritura en memoria
+    input wire aluSrc,     // Señal de fuente para la ALU
+    input [1:0] immSrc,    // Fuente del inmediato
+    input wire regWrite,   // Señal de escritura en el registro
+    input [2:0] aluControl // Salida de control para la ALU
 
-//--------------------- UNIDAD DE CONTROL
-UC UC_inst( //🦎
-    .op                  (mInstr[6:0]  ),// desde la instrucción en memoria
-    .f3                  (mInstr[14:12]),// desde la instrucción en memoria
-    .f7                  (mInstr[30]   ),// desde la instrucción en memoria
-    .zero                (zero         ),// desde la ALU
-    .branch              (branchSel    ),// hacia el multiplexor
-    .jump                (jumpSel      ),// hacia el multiplexor
-    .regWrite            (RegW         ),// hacia el banco de registros
-    .memWrite            (WE           ),// hacia la MMU
-    .aluSrc              (aluSrc       ),// hacia el multiplexor
-    .aluControl          (AControl     ),// hacia la ALU
-    .resSrc              (resSrc       ),// hacia el multiplexor
-    .immSrc              (imm_Src      )// hacia la extensión    
+    output [6:0] f7, //aca basicamente son las entradas
+    output [2:0] f3, //de la unidad de control
+    output [6:0] op,
+    output zero
+
 );
-
-
 //--------------------- MEMORIAS
 DM DM_inst( //memoria de datos
     .clk                 (clk),
@@ -72,62 +66,17 @@ BR BR_inst(
     input wire [4:0]    a3  , // Address input 3 - EL QUE SE VA ESCRIBIR
     input wire [31:0]   wd3 , // Write data input
 
-    output reg [31:0]   rd1 , // Read data output 1
-    output reg [31:0]   rd2  
-
+    input reg [31:0]   rd1 , // Read data input 1
+    input reg [31:0]   rd2  
 
 );
 
 //--------------------- SUMADORES
-adder16 adder_A(
-    .op1                 (addSrc),       // desde el multiplexor
-    .op2                 (pc),           // desde el PC
-    .res                 (pcNext)        // hacia el multiplexor
-);
-adder16 adder_B(
-    .op1                 (inmExt),       // desde la extensión
-    .op2                 (pc),           // desde el PC
-    .res                 (pcjump)        // hacia el multiplexor
-);      
-
+ALU_sum ALU_sum_inst
 //---------------------  MULTIPLEXORES
-mu16 mu_instA(  
-    .i1                  (4),            // 4 bits
-    .i2                  (inmExt),       // desde la extensión  
-    .sel                 (branchSel),    // desde la unidad de control
-    .out                 (addSrc)        // hacia la extensión 
-);
-mu16 mu_instB(
-    .i1                  (pcNext ),      // desde el sumador1
-    .i2                  (pcJump ),      // desde el sumador2
-    .sel                 (jumpSel),      // desde la unidad de control
-    .out                 (pck1 )         // hacia el contador de programa
-);
-mu mu_instC( //32 bits
-    .i1                  (rd2),          // desde el banco de registros
-    .i2                  (inmExt),       // desde la extensión
-    .sel                 (aluSrc),       // desde la unidad de control
-    .out                 (srcB)          // hacia la ALU
-);
-// multiplexor de memoria
-mu4 mu4_instA( 
-    .i1                  (RDM),          // desde la memoria de datos
-    .i2                  (RDS),          // desde la memoria de pila
-    .i3                  (RDU),          // desde el UART
-    .i4                  ( ),            // sin uso
-    .sel                 (mmuSel),       // desde la MMU
-    .out                 (ReadData)      // hacia el multiplexor
-);
-//multiplexor de resultado
-mu4 mu4_instB(
-    .i1                  (AluRes),       // desde la ALU
-    .i2                  (ReadData),     // desde el multiplexor de memoria
-    .i3                  (pcNext ),      // desde el PC
-    .i4                  ( ),            // sin uso
-    .sel                 (resSrc),       // desde la unidad de control
-    .out                 (wd3)           // hacia el archivo de registros
-);
-mu16 mu16_inst(); 
+MP_2x1 mp_2x1_inst0(1,2,pcSrc);
+MP_2x1 mp_3x1_inst1();
+
 
 //--------------------- PC (contador de programa)
 pc_module pc_module_inst(

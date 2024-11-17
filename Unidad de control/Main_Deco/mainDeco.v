@@ -16,12 +16,12 @@ module main_deco(
 
 reg branchAux = 0;          // auxiliary variable for branch signal
 reg jumpAux = 0;            // auxiliary variable for jump signal
-reg [1:0] resSrcAux = 0;    // auxiliary variable for result source
+reg [1:0] resSrcAux = 00;    // auxiliary variable for result source
 reg memWriteAux = 0;        // auxiliary variable for memory write signal
 reg aluSrcAux = 0;          // auxiliary variable for ALU source signal
-reg [1:0] immSrcAux = 0;    // auxiliary variable for immediate source
+reg [1:0] immSrcAux = 00;    // auxiliary variable for immediate source
 reg regWriteAux = 0;        // auxiliary variable for register write signal
-reg [1:0] aluOpAux = 0;     // auxiliary variable for ALU operation
+reg [1:0] aluOpAux = 00;     // auxiliary variable for ALU operation
 
 always @(*)
 begin
