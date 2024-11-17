@@ -2,19 +2,19 @@
 `include "..main_deco/mainDeco.v"
 
 module UC(
-    input [6:0] op,         // opcode
-    input [2:0] f3,         // f3
-    input [6:0] f7,         // f7
-    input wire zero,
+    input [6:0] op,         // Código de operación (opcode)
+    input [2:0] f3,         // Campo f3
+    input [6:0] f7,         // Campo f7
+    input wire zero,        // Señal de cero (resultado de comparación)
 
-    output wire branch,     // branch signal
-    output wire jump,       // jump signal
-    output [1:0] resultSrc,    // result source
-    output wire memWrite,   // memory write signal
-    output wire aluSrc,     // ALU source signal
-    output [1:0] immSrc,    // immediate source
-    output wire regWrite,   // register write signal
-    output [2:0] aluControl // ALU control output
+    output wire branch,     // Señal de bifurcación (branch)
+    output wire jump,       // Señal de salto (jump)
+    output [1:0] resultSrc, // Fuente del resultado
+    output wire memWrite,   // Señal de escritura en memoria
+    output wire aluSrc,     // Señal de fuente para la ALU
+    output [1:0] immSrc,    // Fuente del inmediato
+    output wire regWrite,   // Señal de escritura en el registro
+    output [2:0] aluControl // Salida de control para la ALU
 );
 
 reg [1:0] aluOp;

@@ -6,27 +6,27 @@ escritura debe indicarse explícitamente mediante la señal de control de escrit
 */
 
 module BR(
-    input wire          clk , // Clock
-    input wire          we  , // Write enable    
-    input wire [4:0]    a1  , // Address input 1
-    input wire [4:0]    a2  , // Address input 2 
-    input wire [4:0]    a3  , // Address input 3 - EL QUE SE VA ESCRIBIR
-    input wire [31:0]   wd3 , // Write data input
+    input wire          clk , // Reloj
+    input wire          we  , // Habilitación de escritura    
+    input wire [4:0]    a1  , // Dirección de entrada 1
+    input wire [4:0]    a2  , // Dirección de entrada 2
+    input wire [4:0]    a3  , // Dirección de entrada 3 - EL QUE SE VA A ESCRIBIR
+    input wire [31:0]   wd3 , // Entrada de datos para escribir
 
-    output reg [31:0]   rd1 , // Read data output 1
+    output reg [31:0]   rd1 , // Salida de datos de lectura 1
     output reg [31:0]   rd2       
 );
 
-reg [31:0] BankReg [31:0];       // 32x32-bit register file
+reg [31:0] BankReg [31:0];       // Archivo de registros de 32 registros de 32 bits cada uno
 
 always @(posedge clk) begin
-    if (we) begin           // Write operation executed when we enabled
-        //BankReg[a1] <= wd3;      // Write data to address a1       
-        //BankReg[a2] <= wd3;      // Write data to address a2
-        BankReg[a3] <= wd3;      // Write data to address a3
+    if (we) begin                    // Operación de escritura ejecutada cuando habilitación de escritura está activada
+        //BankReg[a1] <= wd3;        // Escribir datos en la dirección a1       
+        //BankReg[a2] <= wd3;        // Escribir datos en la dirección a2
+        BankReg[a3] <= wd3;          // Escribir datos en la dirección a3
     end
-       rd1 <= BankReg[a1];          // Read data from address a1
-       rd2 <= BankReg[a2];          // Read data from address a2
+       rd1 <= BankReg[a1];          // Leer datos desde la dirección a1
+       rd2 <= BankReg[a2];          // Leer datos desde la dirección a2
 end
 
 endmodule
