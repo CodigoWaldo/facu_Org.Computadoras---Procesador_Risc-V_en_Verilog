@@ -23,7 +23,16 @@ module procesador_TB;
     initial begin
         $dumpfile(`DUMPSTR);  
         $dumpvars(0, procesador_TB);  // Muestra todas las señales para depuración
-
+          $display("Contenido de los registros después de la simulación:");
+        for (i = 0; i < 32; i = i + 1) begin
+            // Imprime el valor de cada registro
+            $display("Registro %d: 0x%h", i, procesador_UUT.datapath_inst.BR_inst.BankReg[i]);
+        end
+        $display("Contenido de la memoria después de la simulación:");
+        for (i = 0; i < 32; i = i + 1) begin
+            // Imprime el valor de cada memoria
+            $display("memoria %d: 0x%h", i, procesador_UUT.datapath_inst.DM_inst.MEM[i]);
+        end
         // Inicialización de señales
         reset_test = 1;  // Activar reset al principio
 
@@ -33,14 +42,11 @@ module procesador_TB;
         // Ejecutar la simulación por DURATION ciclos de reloj
 
         // Al finalizar, imprimir los valores del banco de registros
-        $display("Contenido de los registros después de la simulación:");
+      
 
         // Itera sobre los 32 registros y los imprime
-        #9
-        for (i = 0; i < 32; i = i + 1) begin
-            // Imprime el valor de cada registro
-            $display("Registro %d: 0x%h", i, procesador_UUT.datapath_inst.BR_inst.BankReg[i]);
-        end
+        #99
+
         
         #(DURATION);
         $finish;  // Termina la simulación

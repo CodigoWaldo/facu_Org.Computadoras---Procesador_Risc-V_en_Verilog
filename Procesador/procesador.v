@@ -4,7 +4,7 @@
 module procesador (
     input wire clk,
     input wire reset    // Señal de reset
-    //input wire reset, ? (si es necesario agregar reset, puedes hacerlo aquí)
+        
 );
 wire        pcSrc;
 wire [1:0]  resultSrc;
@@ -17,6 +17,7 @@ wire [6:0]  op;
 wire [6:0]  f7;
 wire [2:0]  f3;
 wire [31:0] zero;
+
 
 // Instancia del datapath
 datapath datapath_inst (
