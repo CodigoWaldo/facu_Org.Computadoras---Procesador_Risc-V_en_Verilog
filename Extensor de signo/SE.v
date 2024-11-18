@@ -22,8 +22,13 @@ module SE(
                 inmExt = {20'b0, inm[24:18], inm[4:0]};
 
             2'b10: // Tipo B
-                inmExt = {{19{inm[25]}}, inm[25], inm[7],
-                 inm[30:25], inm[11:8], 1'b0};
+                inmExt = {{19{inm[24]}}, inm[24], 
+                            inm[0], inm[23:18], inm[4:1], 1'b0}; 
+
+            2'b11: // Tipo J
+                inmExt = {{12{inm[24]}}, inm[12:5], inm[13], 
+                            inm[23:14], 1'b0}; 
+                
             // Tipo R no lleva inm
 
             default:

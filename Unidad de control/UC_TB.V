@@ -18,19 +18,9 @@ module UC_TB;
     wire        regWrite_test;   // Señal de escritura en el registro
     wire [2:0] aluControl_test; 
 
-    UC UC_UUT(
-        .op(op_test),         // Código de operación (opcode)
-        .f3(f3_test),         // Campo f3
-        .f7(f7_test),         // Campo f7
-        .zero(zero_test),        // Señal de cero (resultado de comparación)
-    
-        .pcSrc(pcSrc_test),       // Señal hacia el multiplexor 2x1
-        .resultSrc(resultSrc_test),  // Fuente del resultado
-        .memWrite(memWrite_test),    // Señal de escritura en memoria
-        .aluSrc(aluSrc_test),      // Señal de fuente para la ALU
-        .immSrc(immSrc_test),     // Fuente del inmediato
-        .regWrite(regWrite_test),    // Señal de escritura en el registro
-        .aluControl(aluControl_test)
+    UC UC_UUT (
+        op_test, f3_test, f7_test, zero_test,
+        pcSrc_test, resultSrc_test, memWrite_test, aluSrc_test, immSrc_test, regWrite_test, aluControl_test
     );
 
     initial begin

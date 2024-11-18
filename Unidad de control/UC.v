@@ -26,10 +26,7 @@ main_deco m_deco_inst(
 
 // Instancia del deco ALU
 alu_deco alu_deco_inst(
-    op,
-    f7,
-    f3,
-    aluOp,
+    op, f7, f3, aluOp,
     aluControl
 );
 

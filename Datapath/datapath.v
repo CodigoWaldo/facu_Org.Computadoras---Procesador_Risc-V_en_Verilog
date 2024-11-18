@@ -22,7 +22,7 @@ modulos para conformar el procesador.
 
 module datapath (
     input wire clk,
-    input wire pcSrc,     // Señal de bifurcación (branch)
+    input wire pcSrc,     // Señal de bifurcación o salto (branch o jal)
     input [1:0] resultSrc, // Fuente del resultado
     input wire memWrite,   // Señal de escritura en memoria
     input wire aluSrc,     // Señal de fuente para la ALU
@@ -53,7 +53,16 @@ wire [4:0] a3           //rd    registro destino
 wire [31:0] wd3         //palabra a guardar en el banco
 wire [31:0] rd1         //palabra 1 leida del banco en a1
 wire [31:0] rd2         //palabra 2 leida del banco en a2
-wire [31:0] md_Result   //palabra leida desde la mem data
+wire [31:0] dm_Result   //palabra leida desde la mem data
+wire [31:0] pcPlusImm   //pc al q se le suma un imm como salto
+
+assign a1 = instruction[19:15];
+assign a2 = instruction[24:20];
+assign a3 = instruction[11:7];
+
+assign f7 = instruccion[];
+assign f3 = instruccion[];
+assign op = instruccion[6:0];
 
 
 //--------------------- MEMORIAS
@@ -70,7 +79,7 @@ BR BR_inst(                         //BANCO DE REGISTROS ok
 
 DM DM_inst(                         //memoria de datos ok
     clk, AluResult, rd2, memWrite,
-    md_Result
+    dm_Result
 );
 
 //--------------------- PC (contador de programa) ok
@@ -81,13 +90,19 @@ PC PC_inst(
 
 
 //--------------------- SUMADORES
-ALU_sum ALU_sum_inst(       //alu que suma el inm
-    srcA, srcB, 
-    res
+ALU_sum ALU_sum_inst(  //alu que suma el inm al pc(por si hay salto)
+    pc, immExt, 
+    pcPlusImm
 );
+
+ALU_sum_4b ALU_sum_4b_inst(//me da la siguiente instr sin salto
+    pc,
+    pcPlus4
+);
+
 //---------------------  MULTIPLEXORES
-MP_2x1 mp_2x1_inst0(
-    i1, i2, pcSrc, 
+MP_2x1 mp_2x1_inst0(//decide si el pc_next es +4 o hay salto
+    pcPlus4, pcPlusImm, pcSrc, 
     pc_next
 );
 
@@ -97,20 +112,20 @@ MP_2x1 mp_2x1_inst1( //ok
 );
 
 MP_2x1 mp_3x1_inst0(
-    AluResult, md_Result, i3, selC, 
-    out
+    AluResult, dm_Result, pcPlus4, result_src, 
+    wd3
 );
 
 //--------------------- ALU (la principal)
 alu alu_inst( 
-    srcA, srcB, ALUControl,
+    rd1, srcB, aluControl,
     zero, AluResult
 );
 
 //--------------------- EXTENSIÓN DE SIGNO on it
 sign_ext sign_ext_inst(
-    instruction[31:20], src,
-    inmExt
+    instruction[31:7], immSrc,
+    immExt //inmediato extendido que va a las alus
 );
 
 
