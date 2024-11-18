@@ -10,26 +10,22 @@ resultante de acuerdo al tipo de operación.
 
 module SE(
     input wire [24:0]   inm,        // Dato a extender 
-    input wire          src,        // Tipo de instrucción a ejecutar 
+    input wire [1:0]   src,        // Tipo de instrucción a ejecutar 
     output reg [31:0]  inmExt     // Dato extendido
 );
 
     always @(*) begin
         case (src)
-            1'b0: // Tipo I
+            2'b00: // Tipo I
                 inmExt = {20'b0, inm[24:13]};
-            1'b1: // Tipo S
+            2'b01: // Tipo S
                 inmExt = {20'b0, inm[24:18], inm[4:0]};
-            /*
-            3'b010: // Tipo B
+
+            2'b10: // Tipo B
                 inmExt = {{19{inm[25]}}, inm[25], inm[7],
                  inm[30:25], inm[11:8], 1'b0};
-            3'b011: // Tipo J
-                inmExt = {{11{inm[25]}}, inm[25], inm[19:12], 
-                inm[20], inm[30:21], 1'b0};
-            3'b011: // Tipo U 
-                inmExt = {inm[25:12], 12'b0};
-            */
+            // Tipo R no lleva inm
+
             default:
                 inmExt = 32'b0; //por si las moscas 
         endcase

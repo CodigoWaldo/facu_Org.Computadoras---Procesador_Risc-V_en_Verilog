@@ -21,8 +21,6 @@ reg [31:0] BankReg [31:0];       // Archivo de registros de 32 registros de 32 b
 
 always @(posedge clk) begin
     if (we) begin                    // Operación de escritura ejecutada cuando habilitación de escritura está activada
-        //BankReg[a1] <= wd3;        // Escribir datos en la dirección a1       
-        //BankReg[a2] <= wd3;        // Escribir datos en la dirección a2
         BankReg[a3] <= wd3;          // Escribir datos en la dirección a3
     end
        rd1 <= BankReg[a1];          // Leer datos desde la dirección a1

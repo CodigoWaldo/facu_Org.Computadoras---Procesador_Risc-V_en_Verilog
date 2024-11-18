@@ -16,19 +16,12 @@ module UC(
     output [2:0] aluControl  // Salida de control para la ALU
 );
 
-wire [1:0] aluOp; // Cambiado de reg a wire
+wire [1:0] aluOp; 
 
 // Instancia del deco principal
 main_deco m_deco_inst( 
     op,
-    branch,
-    jump,
-    resultSrc,
-    memWrite,
-    aluSrc,
-    immSrc,    // Corregido el nombre
-    regWrite,
-    aluOp      // Cambiado a wire
+    branch, jump, resultSrc, memWrite, aluSrc, immSrc, regWrite, aluOp      
 );
 
 // Instancia del deco ALU
