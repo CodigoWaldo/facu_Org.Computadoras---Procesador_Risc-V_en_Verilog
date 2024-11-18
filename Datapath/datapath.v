@@ -14,13 +14,14 @@
 `include "../Reg contador de programa/PC.v"
 
 module datapath (
-    input wire clk,
-    input wire pcSrc,     // Señal de bifurcación o salto (branch o jal)
+    input wire  clk,
+    input wire reset,
+    input wire  pcSrc,     // Señal de bifurcación o salto (branch o jal)
     input [1:0] resultSrc,// Fuente del resultado
-    input wire memWrite,  // Señal de escritura en memoria
-    input wire aluSrc,    // Señal de fuente para la ALU
+    input wire  memWrite,  // Señal de escritura en memoria
+    input wire  aluSrc,    // Señal de fuente para la ALU
     input [1:0] immSrc,   // Fuente del inmediato
-    input wire regWrite,  // Señal de escritura en el registro
+    input wire  regWrite,  // Señal de escritura en el registro
     input [2:0] aluControl, // Salida de control para la ALU
 
     output [6:0] f7, //aca basicamente son las entradas
@@ -68,7 +69,7 @@ mem_instr mem_instr_inst(               // memoria de instrucciones okk
  );
 
 BR BR_inst(                             // BANCO DE REGISTROS ok
-    clk, we, a1, a2, a3, wd3, 
+    clk, regWrite, a1, a2, a3, wd3, 
     rd1, rd2
 );
 
@@ -79,7 +80,7 @@ DM DM_inst(                             // memoria de datos ok
 
 //--------------------- PC (contador de programa) ok
 PC PC_inst(
-    clk, pcNext, 
+    clk, reset, pcNext, 
     pc
 );
 
