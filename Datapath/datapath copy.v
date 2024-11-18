@@ -1,7 +1,7 @@
 /*
 Camino de datos: Conexiones que relacionan los distintos 
 modulos para conformar el procesador.
-*/
+
 
 //Unidad de control
 `include "Unidad de control/UC.v"
@@ -122,3 +122,4 @@ sign_ext sign_ext_inst(
 
 
 endmodule
+*/

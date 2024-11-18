@@ -1,0 +1,213 @@
+$date
+	Mon Nov 18 17:35:06 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module datapath_TB $end
+$var wire 32 ! zero_test [31:0] $end
+$var wire 7 " op_test [6:0] $end
+$var wire 7 # f7_test [6:0] $end
+$var wire 3 $ f3_test [2:0] $end
+$var parameter 32 % DURATION $end
+$var reg 3 & aluControl_test [2:0] $end
+$var reg 1 ' aluSrc_test $end
+$var reg 1 ( clk_test $end
+$var reg 2 ) immSrc_test [1:0] $end
+$var reg 1 * memWrite_test $end
+$var reg 1 + pcSrc_test $end
+$var reg 1 , regWrite_test $end
+$var reg 2 - resultSrc_test [1:0] $end
+$scope module datapath_UUT $end
+$var wire 3 . aluControl [2:0] $end
+$var wire 1 ' aluSrc $end
+$var wire 1 ( clk $end
+$var wire 2 / immSrc [1:0] $end
+$var wire 1 * memWrite $end
+$var wire 1 + pcSrc $end
+$var wire 1 , regWrite $end
+$var wire 2 0 resultSrc [1:0] $end
+$var wire 1 1 we $end
+$var wire 32 2 zero [31:0] $end
+$var wire 32 3 wd3 [31:0] $end
+$var wire 32 4 srcB [31:0] $end
+$var wire 32 5 rd2 [31:0] $end
+$var wire 32 6 rd1 [31:0] $end
+$var wire 32 7 pcPlusImm [31:0] $end
+$var wire 32 8 pcPlus4 [31:0] $end
+$var wire 32 9 pcNext [31:0] $end
+$var wire 32 : pc [31:0] $end
+$var wire 7 ; op [6:0] $end
+$var wire 32 < instruction [31:0] $end
+$var wire 32 = immExt [31:0] $end
+$var wire 7 > f7 [6:0] $end
+$var wire 3 ? f3 [2:0] $end
+$var wire 32 @ dm_Result [31:0] $end
+$var wire 5 A a3 [4:0] $end
+$var wire 5 B a2 [4:0] $end
+$var wire 5 C a1 [4:0] $end
+$var wire 32 D AluResult [31:0] $end
+$scope module ALU_sum_4b_inst $end
+$var wire 32 E src [31:0] $end
+$var reg 32 F res [31:0] $end
+$var reg 32 G res0 [31:0] $end
+$upscope $end
+$scope module ALU_sum_inst $end
+$var wire 32 H srcB [31:0] $end
+$var wire 32 I srcA [31:0] $end
+$var reg 32 J res [31:0] $end
+$var reg 32 K res0 [31:0] $end
+$upscope $end
+$scope module BR_inst $end
+$var wire 5 L a1 [4:0] $end
+$var wire 5 M a2 [4:0] $end
+$var wire 5 N a3 [4:0] $end
+$var wire 1 ( clk $end
+$var wire 1 1 we $end
+$var wire 32 O wd3 [31:0] $end
+$var reg 32 P rd1 [31:0] $end
+$var reg 32 Q rd2 [31:0] $end
+$upscope $end
+$scope module DM_inst $end
+$var wire 5 R addressDM [4:0] $end
+$var wire 1 ( clk $end
+$var wire 32 S wd [31:0] $end
+$var wire 1 * we $end
+$var reg 32 T rd [31:0] $end
+$upscope $end
+$scope module PC_inst $end
+$var wire 1 ( clk $end
+$var wire 32 U pcNext [31:0] $end
+$var reg 32 V pc [31:0] $end
+$upscope $end
+$scope module alu_inst $end
+$var wire 3 W ALUControl [2:0] $end
+$var wire 32 X srcA [31:0] $end
+$var wire 32 Y srcB [31:0] $end
+$var reg 32 Z res [31:0] $end
+$var reg 32 [ res0 [31:0] $end
+$var reg 32 \ zero [31:0] $end
+$upscope $end
+$scope module mem_instr_inst $end
+$var wire 5 ] address [4:0] $end
+$var reg 32 ^ rd [31:0] $end
+$upscope $end
+$scope module mp_2x1_inst0 $end
+$var wire 32 _ i1 [31:0] $end
+$var wire 32 ` i2 [31:0] $end
+$var wire 32 a out [31:0] $end
+$var wire 1 + sel $end
+$var reg 32 b aux [31:0] $end
+$upscope $end
+$scope module mp_2x1_inst1 $end
+$var wire 32 c i1 [31:0] $end
+$var wire 32 d out [31:0] $end
+$var wire 1 ' sel $end
+$var wire 32 e i2 [31:0] $end
+$var reg 32 f aux [31:0] $end
+$upscope $end
+$scope module mp_3x1_inst0 $end
+$var wire 32 g i1 [31:0] $end
+$var wire 32 h i2 [31:0] $end
+$var wire 32 i i3 [31:0] $end
+$var wire 32 j out [31:0] $end
+$var wire 2 k sel [1:0] $end
+$var reg 32 l aux [31:0] $end
+$upscope $end
+$scope module sign_ext_inst $end
+$var wire 25 m inm [24:0] $end
+$var wire 2 n src [1:0] $end
+$var reg 32 o inmExt [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1010 %
+$end
+#0
+$dumpvars
+bx o
+bx n
+bx m
+bx l
+bx k
+bx j
+bx i
+bx h
+bx g
+bx f
+bx e
+bx d
+bx c
+bx b
+bx a
+bx `
+bx _
+bx ^
+bx ]
+bx \
+bx [
+bx Z
+bx Y
+bx X
+bx W
+bx V
+bx U
+bx T
+bx S
+bx R
+bx Q
+bx P
+bx O
+bx N
+bx M
+bx L
+bx K
+bx J
+bx I
+bx H
+bx G
+bx F
+bx E
+bx D
+bx C
+bx B
+bx A
+bx @
+bx ?
+bx >
+bx =
+bx <
+bx ;
+bx :
+bx 9
+bx 8
+bx 7
+bx 6
+bx 5
+bx 4
+bx 3
+bx 2
+z1
+bx 0
+bx /
+bx .
+bx -
+x,
+x+
+x*
+bx )
+x(
+x'
+bx &
+bx $
+bx #
+bx "
+bx !
+$end
+#1100000

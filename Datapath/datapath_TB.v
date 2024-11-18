@@ -2,7 +2,7 @@
 `define DUMPSTR "datapath_TB.vcd"
 `timescale 100 ns / 10 ns
 
-module datapath;
+module datapath_TB;
     parameter DURATION = 10;
 
     reg        pcSrc_test;       // Señal hacia el multiplexor 2x1
@@ -17,9 +17,7 @@ module datapath;
     wire [6:0]   op_test;
     wire [2:0]   f3_test;
     wire [6:0]   f7_test;
-    wire         zero_test;
-
-
+    wire  [31:0]       zero_test;
 
     datapath datapath_UUT (
         clk_test, pcSrc_test, resultSrc_test, memWrite_test, aluSrc_test, immSrc_test, regWrite_test, aluControl_test,
