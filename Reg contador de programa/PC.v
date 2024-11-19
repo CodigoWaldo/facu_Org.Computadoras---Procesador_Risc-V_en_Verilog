@@ -11,9 +11,9 @@ module PC(
     output reg [31:0]   pc          // Valor actual del PC
 );
 
-always @(posedge clk or posedge reset) begin 
+always @(posedge clk or reset) begin 
     if (reset) begin
-        pc <= 32'b0;  // Cuando se activa el reset, se reinicia el PC a 0
+        pc <= 32'h00000000;  // Cuando se activa el reset, se reinicia el PC a 0
     end else begin
         pc <= pcNext; // Cuando no hay reset, el PC sigue el valor de pcNext
     end

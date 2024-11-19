@@ -17,6 +17,7 @@ module datapath (
     input wire  clk,
     input wire reset,
     input wire  pcSrc,     // Señal de bifurcación o salto (branch o jal)
+    
     input [1:0] resultSrc,// Fuente del resultado
     input wire  memWrite,  // Señal de escritura en memoria
     input wire  aluSrc,    // Señal de fuente para la ALU
@@ -27,7 +28,7 @@ module datapath (
     output [6:0] f7, //aca basicamente son las entradas
     output [2:0] f3, //de la unidad de control
     output [6:0] op,
-    output [31:0]zero
+    output zero
 );
 /*
 Estructura de instancias de modulos:
@@ -96,6 +97,7 @@ ALU_sum_4b ALU_sum_4b_inst(             //me da la siguiente instr sin salto ok
 );
 
 //---------------------  MULTIPLEXORES
+
 MP_2x1 mp_2x1_inst0(                    //decide si el pc_next es +4 o hay salto ok
     pcPlus4, pcPlusImm, pcSrc, 
     pcNext

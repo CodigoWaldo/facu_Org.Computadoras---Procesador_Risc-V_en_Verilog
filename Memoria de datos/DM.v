@@ -9,19 +9,22 @@ module DM(
     input wire [31:0]   wd,           // entrada de escritura de datos
     input wire          we,          // Write enable
 
-    output reg [31:0]   rd          // salida de dato leido
+    output wire [31:0]   rd          // salida de dato leido
 );
 
 reg [31:0] MEM [31:0];              // 32x32-bit memoria de datos
 
+reg [31:0] rdaux;
 always @(posedge clk) begin
     
     if(we) begin                    
         MEM[addressDM] <= wd;       // escribir datos en dirección adressdm       
     end
-    
-    rd <=  MEM[addressDM];
-   
+       
+    rdaux <=  MEM[addressDM];
 end
+assign rd = rdaux;
+
+
 
 endmodule

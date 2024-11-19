@@ -6,6 +6,7 @@ module procesador (
     input wire reset    // Señal de reset
         
 );
+
 wire        pcSrc;
 wire [1:0]  resultSrc;
 wire        memWrite;
@@ -16,13 +17,14 @@ wire [2:0]  aluControl;
 wire [6:0]  op;
 wire [6:0]  f7;
 wire [2:0]  f3;
-wire [31:0] zero;
+wire  zero;
 
 
 // Instancia del datapath
 datapath datapath_inst (
     .clk(clk), 
     .reset(reset),
+    
     .pcSrc(pcSrc), 
     .resultSrc(resultSrc), 
     .memWrite(memWrite), 

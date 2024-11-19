@@ -12,7 +12,8 @@ reg [31:0] memory [31:0];           // 32 instrucciones de 32 bits que almacena 
 
  // Inicialización de la memoria ROM
 initial begin
-memory[0] = 32'h00300413; // Dirección 0
+   
+memory[0] = 32'h00300413; // Dirección 0 
 memory[1] = 32'h00100493; // Dirección 1
 memory[2] = 32'h01000913; // Dirección 2
 memory[3] = 32'h009462b3; // Dirección 3
@@ -42,6 +43,7 @@ memory[26] = 32'h01202423; // Dirección 26
 memory[27] = 32'h00002283; // Dirección 27
 memory[28] = 32'h00402303; // Dirección 28
 memory[29] = 32'h00802383; // Dirección 29
+
 end
 
 always @(*) 

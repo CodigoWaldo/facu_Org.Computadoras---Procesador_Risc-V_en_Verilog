@@ -5,7 +5,7 @@ module UC(
     input [6:0]     op,         // Código de operación (opcode)
     input [2:0]     f3,         // Campo f3
     input [6:0]     f7,         // Campo f7
-    input [31:0]    zero,        // Señal de cero (resultado de comparación)
+    input    zero,        // Señal de cero (resultado de comparación)
     
     output wire     pcSrc,       // Señal hacia el multiplexor 2x1
     output [1:0]    resultSrc,  // Fuente del resultado
@@ -13,7 +13,8 @@ module UC(
     output wire     aluSrc,      // Señal de fuente para la ALU
     output [1:0]    immSrc,     // Fuente del inmediato
     output wire     regWrite,    // Señal de escritura en el registro
-    output [2:0]    aluControl  // Salida de control para la ALU
+    output [2:0]    aluControl,  // Salida de control para la ALU
+    output  wire    jump  // Salida de control para la ALU
 );
 
 wire [1:0] aluOp; 
@@ -31,6 +32,6 @@ alu_deco alu_deco_inst(
 );
 
 // Lógica combinacional para pcSrc
-assign pcSrc = (zero && branch) || jump;
+assign pcSrc = (zero & branch) | jump;
 
 endmodule
