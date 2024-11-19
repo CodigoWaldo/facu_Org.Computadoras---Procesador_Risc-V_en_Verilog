@@ -17,38 +17,34 @@ module procesador_TB;
         .reset(reset_test)
     );
 
-    // Inicialización de señales
+
     integer i;
 
     initial begin
         $dumpfile(`DUMPSTR);  
-        $dumpvars(0, procesador_TB);  // Muestra todas las señales para depuración
-          $display("Contenido de los registros después de la simulación:");
-        for (i = 0; i < 32; i = i + 1) begin
-            // Imprime el valor de cada registro
-            $display("Registro %d: 0x%h", i, procesador_UUT.datapath_inst.BR_inst.BankReg[i]);
-        end
-        $display("Contenido de la memoria después de la simulación:");
-        for (i = 0; i < 32; i = i + 1) begin
-            // Imprime el valor de cada memoria
-            $display("memoria %d: 0x%h", i, procesador_UUT.datapath_inst.DM_inst.MEM[i]);
-        end
-        // Inicialización de señales
-        reset_test = 1;  // Activar reset al principio
-
-        // Dar un ciclo de reloj con reset activado para asegurar la correcta inicialización
-        #5 reset_test = 0;  // Desactivar el reset después de 5 ns
-
-        // Ejecutar la simulación por DURATION ciclos de reloj
-
-        // Al finalizar, imprimir los valores del banco de registros
-      
-
-        // Itera sobre los 32 registros y los imprime
+        $dumpvars(0, procesador_TB);  
+         $display("Contenido de la memoria de instruccines:");  
+        reset_test = 1;  // Activar reset al principio        
+        #1 reset_test = 0;  // Desactivar el reset después de 5 ns        
+       
         #99
+        $display("Contenido de la memoria de instruccines:");        
+        for (i = 0; i < 32; i = i + 1) begin            
+            $display("instruction memory %d: 0x%h", i, procesador_UUT.datapath_inst.mem_instr_inst.memory[i]);
+        end
+
+        $display("Contenido de la memoria de datos:");
+        for (i = 0; i < 32; i = i + 1) begin           
+            $display("Data memory %d: 0x%h", i, procesador_UUT.datapath_inst.DM_inst.MEM[i]);
+        end
+
+        $display("Contenido de los registros:");
+        for (i = 0; i < 32; i = i + 1) begin            
+            $display("Register %d: 0x%h", i, procesador_UUT.datapath_inst.BR_inst.BankReg[i]);
+        end
 
         
         #(DURATION);
-        $finish;  // Termina la simulación
+        $finish;  
     end
 endmodule

@@ -101,7 +101,7 @@ MP_2x1 mp_2x1_inst0(                    //decide si el pc_next es +4 o hay salto
     pcNext
 );
 
-MP_2x1 mp_2x1_inst1(                    // ok<-JAJAAJ
+MP_2x1 mp_2x1_inst1(                    // ok
     rd2, immExt, aluSrc,  
     srcB
 );

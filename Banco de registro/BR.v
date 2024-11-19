@@ -19,7 +19,9 @@ module BR(
 );
 
 reg [31:0] BankReg [31:0];       // Archivo de registros de 32 registros de 32 bits cada uno
-
+initial begin
+BankReg[0] = 32'h00000000;        // Dirección 0 (zero)
+end
 
 always @(posedge clk) begin
     if (regWrite) begin                    // Operación de escritura ejecutada cuando habilitación de escritura está activada

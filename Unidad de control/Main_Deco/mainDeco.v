@@ -26,6 +26,66 @@ reg [1:0] aluOpAux = 00;     // auxiliary variable for ALU operation
 always @(*)
 begin
     case (op)
+    7'b0000011:      // lw (load word)
+    begin
+        branchAux = 0;
+        resSrcAux = 2'b01; // load word instruction
+        memWriteAux = 0;
+        aluSrcAux = 1;
+        immSrcAux = 2'b00;
+        regWriteAux = 1;
+        aluOpAux = 2'b00;
+    end
+    7'b0100011:     // sw (store word)
+    begin
+        branchAux = 0;
+        memWriteAux = 1; // store word instruction
+        aluSrcAux = 1;
+        immSrcAux = 2'b01;
+        regWriteAux = 0;
+        aluOpAux = 2'b00;
+    end
+    7'b0110011:     // R-Type
+    begin
+        branchAux = 0;
+        resSrcAux = 2'b00;
+        memWriteAux = 0;
+        aluSrcAux = 0;
+        regWriteAux = 1;
+        aluOpAux = 2'b10; // R-type instruction
+    end
+    7'b1100011:     // beq (branch if equal)
+    begin
+        branchAux = 1; // branch if equal instruction
+        memWriteAux = 0;
+        aluSrcAux = 0;
+        immSrcAux = 2'b10;
+        regWriteAux = 0;
+        aluOpAux = 2'b01;
+    end
+    7'b0010011:     // I-Type
+    begin
+        branchAux = 0;
+        resSrcAux = 2'b00;
+        memWriteAux = 0;
+        aluSrcAux = 1;
+        immSrcAux = 2'b00;
+        regWriteAux = 1;
+        aluOpAux = 2'b10; // I-type instruction
+    end
+    7'b1101111:     // jal (jump and link)
+    begin
+        branchAux = 0;
+        jumpAux = 1; // jump and link instruction
+        resSrcAux = 2'b10;
+        memWriteAux = 0;
+        immSrcAux = 2'b11;
+        regWriteAux = 1;
+    end
+endcase
+
+    /*
+    case (op)
         7'd3:      //lw
         begin
             branchAux = 0;
@@ -83,6 +143,7 @@ begin
             regWriteAux = 1;
         end
     endcase
+    */
 end
 
 assign branch = branchAux;
