@@ -5,7 +5,7 @@ module UC(
     input [6:0]     op,         // Código de operación (opcode)
     input [2:0]     f3,         // Campo f3
     input [6:0]     f7,         // Campo f7
-    input    zero,              // Señal de cero (resultado de comparación)
+    input           zero,       // Señal de cero (resultado de comparación)
     
     output wire     pcSrc,       // Señal hacia el multiplexor 2x1
     output [1:0]    resultSrc,   // Fuente del resultado
