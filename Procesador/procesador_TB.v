@@ -3,7 +3,7 @@
 `timescale 100 ns / 10 ns
 
 module procesador_TB;
-    parameter DURATION = 250;
+    parameter DURATION = 100;
 
     reg clk_test = 1;
     reg reset_test = 0;  // Señal de reset
@@ -40,7 +40,7 @@ module procesador_TB;
         #2
         reset_test = 0;        
         
-        #249
+        #99
         $display("Contenido de la memoria de instruccines:");        
         for (i = 0; i < 32; i = i + 1) begin            
             $display("instruction memory %d: 0x%h", i, procesador_UUT.datapath_inst.mem_instr_inst.memory[i]);

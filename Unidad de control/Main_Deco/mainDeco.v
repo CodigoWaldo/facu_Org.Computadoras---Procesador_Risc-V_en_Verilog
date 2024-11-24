@@ -1,7 +1,5 @@
-
 module main_deco(
     input [6:0] op,         // opcode
-
     output wire branch,     // branch signal
     output wire jump,       // jump signal
     output [1:0] resSrc,    // result source
@@ -12,17 +10,15 @@ module main_deco(
     output [1:0] aluOp      // ALU operation
 );
 
-
-// Auxvars
-
-reg branchAux = 0;          // auxiliary variable for branch signal
-reg jumpAux = 1'b0;            // auxiliary variable for jump signal
-reg [1:0] resSrcAux = 00;    // auxiliary variable for result source
-reg memWriteAux = 0;        // auxiliary variable for memory write signal
-reg aluSrcAux = 0;          // auxiliary variable for ALU source signal
-reg [1:0] immSrcAux = 00;    // auxiliary variable for immediate source
-reg regWriteAux = 0;        // auxiliary variable for register write signal
-reg [1:0] aluOpAux = 00;     // auxiliary variable for ALU operation
+//variables auxiliares
+reg branchAux = 0;              // auxiliary variable for branch signal
+reg jumpAux = 1'b0;             // auxiliary variable for jump signal
+reg [1:0] resSrcAux = 00;       // auxiliary variable for result source
+reg memWriteAux = 0;            // auxiliary variable for memory write signal
+reg aluSrcAux = 0;              // auxiliary variable for ALU source signal
+reg [1:0] immSrcAux = 00;       // auxiliary variable for immediate source
+reg regWriteAux = 0;            // auxiliary variable for register write signal
+reg [1:0] aluOpAux = 00;        // auxiliary variable for ALU operation
 
 always @(*)
 begin
@@ -37,7 +33,7 @@ begin
             immSrcAux = 2'b00;
             regWriteAux = 1;
             aluOpAux = 2'b00;
-             jumpAux = 1'b0;
+            jumpAux = 1'b0;
         end
         7'd35:     //sw
         begin

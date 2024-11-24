@@ -3,7 +3,6 @@ Contador de programa: es un registro de 32 bits que guarda la dirección de la
 instrucción que se está ejecutando.
 */
 
-
 module PC(    
     input wire          clk,        // Reloj
     input wire          reset,      // Señal de reset
@@ -13,9 +12,9 @@ module PC(
 
 always @(posedge clk or reset) begin 
     if (reset) begin
-        pc <= 32'h00000000;  // Cuando se activa el reset, se reinicia el PC a 0
+        pc <= 32'h00000000;         // Cuando se activa el reset, se reinicia el PC a 0
     end else begin
-        pc <= pcNext; // Cuando no hay reset, el PC sigue el valor de pcNext
+        pc <= pcNext;               // Cuando no hay reset, el PC sigue el valor de pcNext
     end
 end
 
