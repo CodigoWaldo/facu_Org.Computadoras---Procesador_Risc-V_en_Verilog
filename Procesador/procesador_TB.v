@@ -26,7 +26,7 @@ module procesador_TB;
 
         
         for (i = 0; i < 32; i = i + 1) begin           
-            $dumpvars(0, procesador_UUT.datapath_inst.DM_inst.MEM[i]);
+            $dumpvars(0, procesador_UUT.DM_inst.MEM[i]);
         end     
          
         for (i = 0; i < 32; i = i + 1) begin            
@@ -47,7 +47,7 @@ module procesador_TB;
         end        
         $display("Contenido de la memoria de datos:");
         for (i = 0; i < 32; i = i + 1) begin           
-            $display("Data memory %d: 0x%h", i, procesador_UUT.datapath_inst.DM_inst.MEM[i]);
+            $display("Data memory %d: 0x%h", i, procesador_UUT.DM_inst.MEM[i]);
         end     
         $display("Contenido de los registros:");        
         for (i = 0; i < 32; i = i + 1) begin            

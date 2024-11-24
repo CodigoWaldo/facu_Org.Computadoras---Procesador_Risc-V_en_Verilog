@@ -19,12 +19,14 @@ module datapath (
     input wire  pcSrc,     // Señal de bifurcación o salto (branch o jal)
     
     input [1:0] resultSrc,// Fuente del resultado
-    input wire  memWrite,  // Señal de escritura en memoria
     input wire  aluSrc,    // Señal de fuente para la ALU
     input [1:0] immSrc,   // Fuente del inmediato
     input wire  regWrite,  // Señal de escritura en el registro
     input [2:0] aluControl, // Salida de control para la ALU
+    input [31:0] dm_Result,          //palabra leida desde la mem data
 
+    output [4:0] addressDM,
+    output [31:0] wd,        //palabra 2 leida del banco en a2[]
     output [6:0] f7, //aca basicamente son las entradas
     output [2:0] f3, //de la unidad de control
     output [6:0] op,
@@ -37,7 +39,6 @@ Estructura de instancias de modulos:
       outputs
   );
 */
-
 wire [31:0] pc;                 //el adress de la instr actual
 wire [31:0] pcNext;             //cuanto tengo q avanzar(si no hay pcSrc=0-> +4)
 wire [31:0] instruction;        //instr actual (a donde apunta el pc)
@@ -47,7 +48,6 @@ wire [4:0] a3 ;                 //rd    registro destino
 wire [31:0] wd3;                //palabra a guardar en el banco
 wire [31:0] rd1;                //palabra 1 leida del banco en a1
 wire [31:0] rd2;                //palabra 2 leida del banco en a2
-wire [31:0] dm_Result;          //palabra leida desde la mem data
 wire [31:0] pcPlusImm;          //pc al q se le suma un imm como salto
 wire [31:0] AluResult;          //resultado de la alu pricipal
 wire [31:0] immExt ;            //inmediato extendido por el SE
@@ -61,6 +61,8 @@ assign a3 = instruction[11:7];
 assign f7 = instruction[31:25];
 assign f3 = instruction[14:12];
 assign op = instruction[6:0];
+assign wd = rd2;
+assign addressDM = AluResult[6:2];
 
 
 //--------------------- MEMORIAS
@@ -72,11 +74,6 @@ mem_instr mem_instr_inst(               // memoria de instrucciones okk
 BR BR_inst(                             // BANCO DE REGISTROS ok
     clk, regWrite, a1, a2, a3, wd3, 
     rd1, rd2
-);
-
-DM DM_inst(                             // memoria de datos ok
-    clk, AluResult[6:2], rd2, memWrite,
-    dm_Result
 );
 
 //--------------------- PC (contador de programa) ok

@@ -17,17 +17,19 @@ wire [2:0]  aluControl;
 wire [6:0]  op;
 wire [6:0]  f7;
 wire [2:0]  f3;
-wire  zero;
+wire        zero;
+wire [4:0]  addressDM;
+wire [31:0] wd;
+wire [31:0] dm_Result;    
+
 
 
 // Instancia del datapath
 datapath datapath_inst (
-    .clk(clk), 
+    .clk(clk),
     .reset(reset),
-    
     .pcSrc(pcSrc), 
     .resultSrc(resultSrc), 
-    .memWrite(memWrite), 
     .aluSrc(aluSrc), 
     .immSrc(immSrc), 
     .regWrite(regWrite), 
@@ -35,7 +37,10 @@ datapath datapath_inst (
     .f7(f7), 
     .f3(f3), 
     .op(op), 
-    .zero(zero)
+    .zero(zero),
+    .dm_Result(dm_Result),
+    .wd(wd),
+    .addressDM(addressDM)
 );
 
 // Instancia de la unidad de control
@@ -46,11 +51,18 @@ UC UC_inst (
     .zero(zero),
     .pcSrc(pcSrc), 
     .resultSrc(resultSrc), 
-    .memWrite(memWrite), 
     .aluSrc(aluSrc), 
     .immSrc(immSrc), 
     .regWrite(regWrite), 
-    .aluControl(aluControl)
+    .aluControl(aluControl),
+    .memWrite(memWrite) 
+
 );
+
+DM DM_inst(                             // memoria de datos ok
+    clk, addressDM, wd, memWrite,
+    dm_Result
+);
+
 
 endmodule
