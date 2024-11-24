@@ -1,7 +1,7 @@
 /*
 Unidad Aritmético Lógica: es un circuito digital que calcula operaciones 
 aritméticas (suma, resta, multiplicación, etc.), lógicas (AND, OR, NOT, XOR) 
-y comparaciones para los saltos condicionales entre los operandos. .
+y comparaciones para los saltos condicionales entre los operandos.
 */
 
 
@@ -9,7 +9,7 @@ module ALU(
     input wire [31:0]   srcA,
     input wire [31:0]   srcB,
     input wire [2:0]    ALUControl,
-    output              zero,   //devuelve siempre zero 
+    output              zero,            
     output reg [31:0]   res   
 );
 
@@ -28,7 +28,7 @@ always @(*)
                 res0 = srcA || srcB;
             3'b101: //set less than
                 res0= (resta[31]==1'b1)? 32'h00000001: 32'h0000;
-            default: // do nothing
+            default: // por si las chauchas
                 res0=srcA;    
         endcase                
     

@@ -10,35 +10,24 @@ resultante de acuerdo al tipo de operación.
 
 module SE(
     input wire [24:0]   inm,        // Dato a extender 
-    input wire [1:0]   src,        // Tipo de instrucción a ejecutar 
-    output reg [31:0]  inmExt     // Dato extendido
+    input wire [1:0]   src,         // Tipo de instrucción a ejecutar 
+    output reg [31:0]  inmExt       // Dato extendido
 );
 
+always @(*) begin
+    case (src)
+        2'b00: // Tipo I
+            inmExt = {{20{inm[24]}}, inm[24:13]};
+        2'b01: // Tipo S
+            inmExt = {{20{inm[24]}}, inm[24:18], inm[4:0]};
+        2'b10: // Tipo B
+            inmExt = {{19{inm[24]}}, inm[24], inm[0], inm[23:18], inm[4:1], 1'b0};
+        2'b11: // Tipo J           
+        inmExt = {{4{inm[24]}} , inm[24], inm[12:5],inm[13],inm[23:14], 1'b0}; 
+        // Tipo R no lleva inm
+        default:
+            inmExt = 32'b0; //por si las moscas 
+    endcase
+end
 
-
-    always @(*) begin
-        case (src)
-
-            2'b00: // Tipo I
-                inmExt = {{20{inm[24]}}, inm[24:13]};
-            2'b01: // Tipo S
-                inmExt = {{20{inm[24]}}, inm[24:18], inm[4:0]};
-
-            2'b10: // Tipo B
-                inmExt = {{19{inm[24]}}, inm[24], 
-                            inm[0], inm[23:18], inm[4:1], 1'b0}; 
-
-            2'b11: // Tipo J
-           // inmExt = {{12{inm[24]}}, inm[12], inm[23:14], inm[13], inm[23:14], 1'b0};
-            //inmExt2 = {{12{inm[24]}},imm[12:5],inm[13],inm[23:14],1'b0 };
-            inmExt = {{4{inm[24]}} , inm[24], inm[12:5],inm[13],inm[23:14], 1'b0}; 
-
-
-                
-            // Tipo R no lleva inm
-
-            default:
-                inmExt = 32'b0; //por si las moscas 
-        endcase
-    end
 endmodule

@@ -7,6 +7,7 @@ module procesador (
         
 );
 
+//Declaración de todas las variables a utilizar
 wire        pcSrc;
 wire [1:0]  resultSrc;
 wire        memWrite;
@@ -21,8 +22,6 @@ wire        zero;
 wire [4:0]  addressDM;
 wire [31:0] wd;
 wire [31:0] dm_Result;    
-
-
 
 // Instancia del datapath
 datapath datapath_inst (
@@ -58,10 +57,10 @@ UC UC_inst (
     .memWrite(memWrite) 
 
 );
-
-DM DM_inst(                             // memoria de datos ok
-    clk, addressDM, wd, memWrite,
-    dm_Result
+// Instancia de memoria de datos
+DM DM_inst(                             
+    clk, addressDM, wd, memWrite,   //inputs
+    dm_Result                       //output
 );
 
 

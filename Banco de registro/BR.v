@@ -8,17 +8,17 @@ escritura debe indicarse explícitamente mediante la señal de control de escrit
 module BR(
     input wire          clk ,           // Reloj
     input wire         regWrite  ,      // Habilitación de escritura (we)   
-    input wire [4:0]    a1  ,           // Dirección de entrada 1
-    input wire [4:0]    a2  ,           // Dirección de entrada 2
+    input wire [4:0]    a1  ,           // Dirección de lectura 1
+    input wire [4:0]    a2  ,           // Dirección de lectura 2
     input wire [4:0]    a3  ,           // Dirección de entrada 3 - EL QUE SE VA A ESCRIBIR
     input wire [31:0]   wd3 ,           // Entrada de datos para escribir
 
     output wire [31:0]   rd1 ,          // Salida de datos de lectura 1
-    output wire [31:0]   rd2       
+    output wire [31:0]   rd2            // Salida de datos de lectura 2 
    
 );
 
-reg [31:0] BankReg [31:0];              // Archivo de registros de 32 registros de 32 bits cada uno
+reg [31:0] BankReg [31:0];            // Archivo de registros de 32 registros de 32 bits cada uno
 initial begin    
     BankReg[0] = 32'h00000000;        // Dirección 0 (zero)
     BankReg[1] = 32'h00000000;        // Dirección 1 (ra - Return Address)
@@ -54,8 +54,6 @@ initial begin
     BankReg[31] = 32'h00000000;       // Dirección 31 (t6 - Temporal 6)
 end
 
-
-
 always @(posedge clk) begin         // ESCRITURA SINCRONICA
     
     if (regWrite && a3 != 0) begin                    
@@ -65,8 +63,8 @@ always @(posedge clk) begin         // ESCRITURA SINCRONICA
 end
                                     //LECTURA ASINCRONICA
 
-assign rd1 = BankReg[a1];        // Leer datos desde la dirección a1
-assign rd2 = BankReg[a2];        // Leer datos desde la dirección a2
+assign rd1 = BankReg[a1];           // Leer datos desde la dirección a1
+assign rd2 = BankReg[a2];           // Leer datos desde la dirección a2
 
 
 endmodule
